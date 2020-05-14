@@ -48,7 +48,7 @@ channels:
 
     # Required. list of peers from participating orgs
     peers:
-      peer0.org1.rolex.com:
+      peer0.org1.mfg.com:
         # [Optional]. will this peer be sent transaction proposals for endorsement? The peer must
         # have the chaincode installed. The app can also use this property to decide which peers
         # to send the chaincode install request. Default: true
@@ -72,28 +72,14 @@ channels:
         # Default: true
         discover: true
 
-      peer0.org2.dealer.com:
+      peer0.org2.retailer.com:
         endorsingPeer: true
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: true
         discover: false
 
-      peer0.org3.service.com:
-        endorsingPeer: true
-        chaincodeQuery: true
-        ledgerQuery: true
-        eventSource: true
-        discover: false
-
-      peer0.org4.insurer.com:
-        endorsingPeer: true
-        chaincodeQuery: true
-        ledgerQuery: true
-        eventSource: true
-        discover: false
-
-      
+     
 
     # [Optional]. what chaincodes are expected to exist on this channel? The application can use
     # this information to validate that the target peers are in the expected state by comparing
@@ -110,7 +96,7 @@ organizations:
     mspid: MfgOrg1MSP
 
     peers:
-      - peer0.org1.rolex.com
+      - peer0.org1.mfg.com
 
     # [Optional]. Certificate Authorities issue certificates for identification purposes in a Fabric based
     # network. Typically certificates provisioning is done in a separate process outside of the
@@ -128,9 +114,9 @@ organizations:
     # this way. The SDK should allow applications to set the org admin identity via APIs, and only use
     # this route as an alternative when it exists.
     adminPrivateKey:
-      path: artifacts/channel/crypto-config/peerOrganizations/org1.rolex.com/users/Admin@org1.rolex.com/msp/keystore/5c9e5dc3c22daa345d6018ddddb258151dc8d02d569fc8e57a737d853ba96f1e_sk
+      path: artifacts/channel/crypto-config/peerOrganizations/org1.mfg.com/users/Admin@org1.mfg.com/msp/keystore/3974280709a4e1c6db530fa38502bb7259df9a4a6aef1a8ad0f0347e3d3ce74a_sk
     signedCert:
-      path: artifacts/channel/crypto-config/peerOrganizations/org1.rolex.com/users/Admin@org1.rolex.com/msp/signcerts/Admin@org1.rolex.com-cert.pem
+      path: artifacts/channel/crypto-config/peerOrganizations/org1.mfg.com/users/Admin@org1.mfg.com/msp/signcerts/Admin@org1.mfg.com-cert.pem
   # the profile will contain public information about organizations other than the one it belongs to.
   # These are necessary information to make transaction lifecycles work, including MSP IDs and
   # peers with a public URL to send transaction proposals. The file will not contain private
@@ -138,38 +124,17 @@ organizations:
   # fabric-ca registrar enroll ID and secret, etc.
 
   Org2:
-    mspid: DealerOrg2MSP
+    mspid: RetailerOrg2MSP
     peers:
-      - peer0.org2.dealer.com
+      - peer0.org2.retailer.com
     certificateAuthorities:
       - ca-org2
     adminPrivateKey:
-      path: artifacts/channel/crypto-config/peerOrganizations/org2.dealer.com/users/Admin@org2.dealer.com/msp/keystore/be695bde008cc534dc2081fee300b5975c5f31449e15e97ffc4aca6f442d2ca6_sk
+      path: artifacts/channel/crypto-config/peerOrganizations/org2.retailer.com/users/Admin@org2.retailer.com/msp/keystore/94e3f626e7e6852d1e4cde14475deab409e7dadd3575d2ba2083bfeeb9e873d4_sk
     signedCert:
-      path: artifacts/channel/crypto-config/peerOrganizations/org2.dealer.com/users/Admin@org2.dealer.com/msp/signcerts/Admin@org2.dealer.com-cert.pem
+      path: artifacts/channel/crypto-config/peerOrganizations/org2.retailer.com/users/Admin@org2.retailer.com/msp/signcerts/Admin@org2.retailer.com-cert.pem
 
-  Org3:
-    mspid: ServiceOrg3MSP
-    peers:
-      - peer0.org3.service.com
-    certificateAuthorities:
-      - ca-org3
-    adminPrivateKey:
-      path: artifacts/channel/crypto-config/peerOrganizations/org3.service.com/users/Admin@org3.service.com/msp/keystore/a91064175741305b59be8c9dd0e294744197f55fb84395980064ce657cfaf026_sk
-    signedCert:
-      path: artifacts/channel/crypto-config/peerOrganizations/org3.service.com/users/Admin@org3.service.com/msp/signcerts/Admin@org3.service.com-cert.pem
-
-  Org4:
-    mspid: InsurerOrg4MSP
-    peers:
-      - peer0.org4.insurer.com
-    certificateAuthorities:
-      - ca-org4
-    adminPrivateKey:
-      path: artifacts/channel/crypto-config/peerOrganizations/org4.insurer.com/users/Admin@org4.insurer.com/msp/keystore/9c39f295dc07b927c63f27377bb893019ffebcfced37d8f83619fab42c2931c5_sk
-    signedCert:
-      path: artifacts/channel/crypto-config/peerOrganizations/org4.insurer.com/users/Admin@org4.insurer.com/msp/signcerts/Admin@org4.insurer.com-cert.pem
-
+  
 #--------------------------------------------------------------------------------------------------------------
 #
 # List of orderers to send transaction and channel create/update requests to. For the time
@@ -193,38 +158,24 @@ orderers:
 # and event listener registration.
 #
 peers:
-  peer0.org1.rolex.com:
+  peer0.org1.mfg.com:
     # this URL is used to send endorsement and query requests
     url: grpcs://localhost:7051
 
     grpcOptions:
-      ssl-target-name-override: peer0.org1.rolex.com
+      ssl-target-name-override: peer0.org1.mfg.com
     tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org1.rolex.com/peers/peer0.org1.rolex.com/tls/ca.crt
+      path: artifacts/channel/crypto-config/peerOrganizations/org1.mfg.com/peers/peer0.org1.mfg.com/tls/ca.crt
 
 
-  peer0.org2.dealer.com:
+  peer0.org2.retailer.com:
     url: grpcs://localhost:8051
     grpcOptions:
-      ssl-target-name-override: peer0.org2.dealer.com
+      ssl-target-name-override: peer0.org2.retailer.com
     tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org2.dealer.com/peers/peer0.org2.dealer.com/tls/ca.crt
+      path: artifacts/channel/crypto-config/peerOrganizations/org2.retailer.com/peers/peer0.org2.retailer.com/tls/ca.crt
 
-  peer0.org3.service.com:
-    url: grpcs://localhost:9051
-    grpcOptions:
-      ssl-target-name-override: peer0.org3.service.com
-    tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org3.service.com/peers/peer0.org3.service.com/tls/ca.crt
-
-  peer0.org4.insurer.com:
-    url: grpcs://localhost:10051
-    grpcOptions:
-      ssl-target-name-override: peer0.org4.insurer.com
-    tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org4.insurer.com/peers/peer0.org4.insurer.com/tls/ca.crt
-
-
+  
 #--------------------------------------------------------------------------------------------------------
 # Fabric-CA is a special kind of Certificate Authority provided by Hyperledger Fabric which allows
 # certificate management to be done via REST APIs. Application may choose to use a standard
@@ -238,7 +189,7 @@ certificateAuthorities:
     httpOptions:
       verify: false
     tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org1.rolex.com/ca/ca.org1.rolex.com-cert.pem
+      path: artifacts/channel/crypto-config/peerOrganizations/org1.mfg.com/ca/ca.org1.mfg.com-cert.pem
 
     # Fabric-CA supports dynamic user enrollment via REST APIs. A "root" user, a.k.a registrar, is
     # needed to enroll and invoke new users.
@@ -253,33 +204,11 @@ certificateAuthorities:
     httpOptions:
       verify: false
     tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org2.dealer.com/ca/ca.org2.dealer.com-cert.pem
+      path: artifacts/channel/crypto-config/peerOrganizations/org2.retailer.com/ca/ca.org2.retailer.com-cert.pem
     registrar:
       - enrollId: admin
         enrollSecret: adminpw
     # [Optional] The optional name of the CA.
     caName: ca-org2
 
-  ca-org3:
-    url: https://localhost:9054
-    httpOptions:
-      verify: false
-    tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org3.service.com/ca/ca.org3.service.com-cert.pem
-    registrar:
-      - enrollId: admin
-        enrollSecret: adminpw
-    # [Optional] The optional name of the CA.
-    caName: ca-org3
-
-  ca-org4:
-    url: https://localhost:10054
-    httpOptions:
-      verify: false
-    tlsCACerts:
-      path: artifacts/channel/crypto-config/peerOrganizations/org4.insurer.com/ca/ca.org4.insurer.com-cert.pem
-    registrar:
-      - enrollId: admin
-        enrollSecret: adminpw
-    # [Optional] The optional name of the CA.
-    caName: ca-org4
+  

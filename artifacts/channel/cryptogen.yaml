@@ -27,7 +27,7 @@ PeerOrgs:
   # Org1
   # ---------------------------------------------------------------------------
   - Name: Org1
-    Domain: org1.rolex.com
+    Domain: org1.mfg.com
 
     # ---------------------------------------------------------------------------
     # "CA"
@@ -101,7 +101,7 @@ PeerOrgs:
   # Org2: See "Org1" for full specification
   # ---------------------------------------------------------------------------
   - Name: Org2
-    Domain: org2.dealer.com
+    Domain: org2.retailer.com
     CA:
        Hostname: ca # implicitly ca.org1.example.com
 
@@ -112,32 +112,3 @@ PeerOrgs:
     Users:
       Count: 1
 
- # ---------------------------------------------------------------------------
-  # Org3: See "Org1" for full specification
-  # ---------------------------------------------------------------------------
-  - Name: Org3
-    Domain: org3.service.com
-    CA:
-       Hostname: ca # implicitly ca.org1.example.com
-
-    Template:
-      Count: 1
-      SANS:
-        - "localhost"
-    Users:
-      Count: 1
-
- # ---------------------------------------------------------------------------
-  # Org4: See "Org1" for full specification
-  # ---------------------------------------------------------------------------
-  - Name: Org4
-    Domain: org4.insurer.com
-    CA:
-       Hostname: ca # implicitly ca.org1.example.com
-
-    Template:
-      Count: 1
-      SANS:
-        - "localhost"
-    Users:
-      Count: 1
